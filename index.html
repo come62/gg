@@ -432,5 +432,32 @@ loadPrice();
 setInterval(loadPrice,2000);
 startSSE();
 </script>
+
+
+
+<script>
+const ws = new WebSocket('wss://k1.9999j.cn:24999/ws/market/jjl99999.com');
+
+ws.onopen = function () {
+  document.body.innerHTML += '<h1>连接成功</h1>';
+  ws.send('jjl99999.com');
+};
+
+ws.onmessage = function (e) {
+  document.body.innerHTML += '<p>' + e.data + '</p>';
+};
+
+ws.onerror = function () {
+  document.body.innerHTML += '<h1>连接错误</h1>';
+};
+
+ws.onclose = function () {
+  document.body.innerHTML += '<h1>连接关闭</h1>';
+};
+</script>
+
+
+
+  
 </body>
 </html>
