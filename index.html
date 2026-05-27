@@ -1,0 +1,436 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金典国际百货商城</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#4FC3F7;--gold2:#81D4FA;--gold3:#0277BD;--bg:#0A1628;--line:rgba(79,195,247,0.22);--text:#E3F2FD;--dim:#7BA7C2;}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;background:var(--bg);color:var(--text);font-family:'Noto Serif SC',serif;}
+body{display:flex;flex-direction:column;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 120% 60% at 50% -5%,rgba(79,195,247,0.12) 0%,transparent 55%),radial-gradient(ellipse 60% 80% at 5% 50%,rgba(79,195,247,0.05) 0%,transparent 50%),radial-gradient(ellipse 60% 80% at 95% 50%,rgba(79,195,247,0.05) 0%,transparent 50%);pointer-events:none;z-index:0;}
+.topbar{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:12px 28px 10px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.brand-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.brand-zh{font-size:22px;font-weight:600;color:var(--gold2);letter-spacing:.12em;}
+.brand-sub{font-size:9px;letter-spacing:.28em;color:var(--gold3);margin-top:2px;}
+.topright{display:flex;align-items:center;gap:12px;margin-left:auto;}
+.fs-btn{position:fixed;top:7px;right:6px;z-index:999;background:transparent;border:1px solid var(--line);color:var(--dim);padding:0px 3px;border-radius:3px;font-size:8px;cursor:pointer;line-height:1.4;transition:all .2s;}
+.fs-btn:hover{border-color:var(--gold);color:var(--gold)}.divline{display:flex;align-items:center;gap:10px;padding:5px 28px;flex-shrink:0;}
+.divline::before,.divline::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,var(--line))}
+.divline::after{background:linear-gradient(to left,transparent,var(--line))}
+.divline-inner{font-size:9px;letter-spacing:.35em;color:var(--dim);white-space:nowrap}
+.grid{flex:1;display:grid;position:relative;z-index:1;grid-template-columns:1fr 1fr;}
+@media(min-width:768px){html,body{height:100%;overflow:hidden;}body{height:100vh;}.grid{grid-template-columns:1fr 1fr 1fr 1fr;grid-template-rows:1fr 1fr;}.col{border-right:none;border-bottom:none;}.col:not(:nth-child(4n)){box-shadow:inset -1px 0 0 rgba(79,195,247,0.10), inset -2px 0 0 rgba(255,255,255,0.04), inset -3px 0 0 rgba(0,0,0,0.25);}.col:nth-child(-n+4){box-shadow:inset 0 -1px 0 rgba(79,195,247,0.10), inset 0 -2px 0 rgba(255,255,255,0.04), inset 0 -3px 0 rgba(0,0,0,0.25);}.col:not(:nth-child(4n)):nth-child(-n+4){box-shadow:inset -1px 0 0 rgba(79,195,247,0.10), inset -2px 0 0 rgba(255,255,255,0.04), inset -3px 0 0 rgba(0,0,0,0.25), inset 0 -1px 0 rgba(79,195,247,0.10), inset 0 -2px 0 rgba(255,255,255,0.04), inset 0 -3px 0 rgba(0,0,0,0.25);}.chart-area{height:90px;flex-shrink:0;}}
+@media(max-width:767px){.grid{grid-template-columns:1fr 1fr;}.col{border-right:1px solid var(--line);border-bottom:1px solid var(--line);}.col:nth-child(2n){border-right:none;}.chart-area{height:120px;flex-shrink:0;}.brand-zh{font-size:16px;font-weight:900;letter-spacing:.04em;white-space:nowrap;}.brand-sub{font-size:8px;letter-spacing:.12em;}.price-cny{font-size:clamp(32px,8vw,52px)!important;}.metal-name{font-size:clamp(26px,7vw,40px)!important;}.topbar{padding:8px 36px 8px 6px;min-height:0;}.brand-center{position:static;transform:none;flex:1;text-align:center;white-space:normal;margin-right:20px;}}
+.col{display:flex;flex-direction:column;align-items:center;padding:12px 16px 8px;position:relative;overflow:hidden;}
+.col::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:60%;height:1px;background:linear-gradient(to right,transparent,rgba(79,195,247,0.4),transparent);opacity:0;transition:opacity .4s;}
+.col:hover::before{opacity:1}.metal-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.3em;color:var(--dim);margin-bottom:2px;text-transform:uppercase;}
+.metal-name{font-family:'Noto Serif SC',serif;font-weight:900;font-size:clamp(26px,3vw,42px);letter-spacing:.12em;margin-bottom:1px;}
+.metal-name.g{color:#FFD54F}.metal-name.s{color:#E0F7FA}.metal-name.p{color:#B0BEC5}.metal-name.d{color:#FFCCBC}.metal-name.a{color:#FFF176}.metal-name.k{color:#FFCA28}.metal-name.pt{color:#90CAF9}.metal-name.pd{color:#FFAB91}
+.metal-sub{font-size:9px;color:var(--dim);letter-spacing:.2em;margin-bottom:4px}.price-label{font-size:9px;letter-spacing:.15em;color:var(--dim);margin-bottom:2px;text-align:center;}
+.price-cny{font-family:'SimSun','宋体',serif;font-size:clamp(36px,4vw,68px);font-weight:400;line-height:1;transition:color .3s;text-align:center;}
+.price-cny.up{color:#4DCB82}.price-cny.down{color:#E05555}.price-cny.neu{color:var(--text)}
+.price-unit{font-size:9px;color:var(--dim);letter-spacing:.2em;margin-top:2px;text-align:center;}
+.chg{font-family:'JetBrains Mono',monospace;font-size:10px;margin:3px 0 2px;padding:2px 8px;border-radius:3px;letter-spacing:.05em;}
+.chg.up{color:#4DCB82;background:rgba(77,203,130,.1)}.chg.down{color:#E05555;background:rgba(224,85,85,.1)}.chg.neu{color:var(--dim)}
+.chart-area{width:100%;display:flex;flex-direction:column;}.chart-tabs{display:flex;gap:0;margin-bottom:4px;justify-content:center;border:1px solid var(--line);border-radius:6px;overflow:hidden;width:fit-content;align-self:center;}
+.chart-tab{font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 10px;color:var(--dim);cursor:pointer;letter-spacing:.1em;transition:all .2s;background:transparent;border:none;border-right:1px solid var(--line);}
+.chart-tab:last-child{border-right:none;}.chart-tab.active{color:#0A1628;background:var(--gold);font-weight:600;}
+.chart-tab:hover:not(.active){color:var(--gold2);background:rgba(79,195,247,.08)}.chart-wrap{flex:1;position:relative;border-radius:6px;overflow:hidden;background:rgba(10,22,40,0.7);border:1px solid rgba(79,195,247,0.10);}
+canvas.chart{position:absolute;inset:0;width:100%;height:100%;}@keyframes fu{0%{background:rgba(77,203,130,.10)}100%{background:transparent}}
+@keyframes fd{0%{background:rgba(224,85,85,.08)}100%{background:transparent}}
+.col.fu{animation:fu .7s ease-out}.col.fd{animation:fd .7s ease-out}
+.bottombar{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:6px 28px;border-top:1px solid var(--line);position:relative;z-index:2;flex-wrap:wrap;gap:6px;}
+.status-wrap{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--dim);flex-shrink:0;cursor:pointer;}
+.dot.live{background:#3DBA6F;box-shadow:0 0 10px #3DBA6F;animation:blink 2s infinite}
+.dot.err{background:#C94040}@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.lupd{font-size:10px;color:var(--dim);cursor:pointer;}
+.disclaimer{font-size:13px;font-weight:600;color:#E05555;letter-spacing:.12em;}
+.hidden-trigger{position:fixed;bottom:0;right:0;width:44px;height:44px;z-index:100;cursor:default;}
+.noticebar{display:flex;align-items:center;gap:6px;padding:3px 28px;background:rgba(79,195,247,0.05);border-bottom:1px solid var(--line);font-size:11px;color:var(--dim);overflow:hidden;flex-shrink:0;}
+.notice-icon{color:var(--gold);flex-shrink:0;font-size:12px;}
+.notice-wrap{flex:1;overflow:hidden;position:relative;height:18px;}
+.notice-text{position:absolute;white-space:nowrap;color:rgba(255,120,120,0.9);letter-spacing:.05em;}
+@keyframes marquee{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
+.pwd-wrap{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:300;display:none;padding-bottom:10px;}
+.pwd-wrap.show{display:block;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.pwd-input{background:rgba(10,22,40,0.75);border:1px solid rgba(79,195,247,0.22);border-radius:8px;color:rgba(227,242,253,0.5);font-family:'JetBrains Mono',monospace;font-size:13px;padding:7px 18px;outline:none;width:190px;text-align:center;letter-spacing:.25em;backdrop-filter:blur(6px);caret-color:transparent;}
+.pwd-input::placeholder{color:rgba(123,167,194,0.35);font-size:11px;}.premium-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;}
+.premium-overlay.open{display:flex}.premium-panel{background:linear-gradient(135deg,#0A1628 0%,#0D2040 100%);border:1px solid rgba(79,195,247,0.3);border-radius:18px;padding:28px 32px;width:min(760px,95vw);position:relative;max-height:92vh;overflow-y:auto;box-shadow:0 0 60px rgba(79,195,247,0.10);}
+.pp-title{font-size:20px;color:var(--gold);margin-bottom:3px;letter-spacing:.1em;}
+.pp-sub{font-size:10px;color:var(--dim);letter-spacing:.15em;margin-bottom:18px}.pp-close{position:absolute;top:16px;right:20px;background:transparent;border:none;color:var(--dim);font-size:24px;cursor:pointer;}
+.pp-close:hover{color:var(--gold)}.pp-row{display:flex;align-items:stretch;margin-bottom:12px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:rgba(10,22,40,0.6);}
+.pp-metal{padding:10px 14px;width:72px;flex-shrink:0;border-right:1px solid var(--line);text-align:center;display:flex;flex-direction:column;justify-content:center;}
+.pp-metal-name{font-size:14px;font-weight:600}.pp-metal-name.g{color:#FFD54F}.pp-metal-name.s{color:#E0F7FA}.pp-metal-name.p{color:#B0BEC5}.pp-metal-name.d{color:#FFCCBC}.pp-metal-name.a{color:#FFF176}.pp-metal-name.k{color:#FFCA28}.pp-metal-name.pt{color:#90CAF9}.pp-metal-name.pd{color:#FFAB91}
+.pp-metal-sub{font-size:9px;color:var(--dim);letter-spacing:.12em;margin-top:2px}
+.pp-main{flex:1;display:flex;flex-direction:column;}
+.pp-mode-tabs{display:flex;border-bottom:1px solid var(--line);}
+.pp-mode-tab{flex:1;padding:6px 0;font-size:10px;letter-spacing:.15em;text-align:center;cursor:pointer;color:var(--dim);transition:all .2s;font-family:'JetBrains Mono',monospace;background:transparent;border:none;}
+.pp-mode-tab.active{color:var(--gold2);background:rgba(79,195,247,.10)}
+.pp-mode-tab:first-child{border-right:1px solid var(--line);}
+.pp-pct-ctrl,.pp-fixed-ctrl{display:flex;align-items:center;gap:8px;padding:10px 12px;}
+.pp-hidden{display:none}.pp-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:rgba(79,195,247,.08);color:var(--gold);font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-family:monospace;user-select:none;}
+.pp-btn:hover{background:rgba(79,195,247,.25);border-color:var(--gold)}
+.pp-btn:active{transform:scale(.88)}.pp-range{flex:1;height:4px;-webkit-appearance:none;appearance:none;border-radius:2px;outline:none;cursor:pointer;}
+.pp-range.g{background:linear-gradient(to right,#0a2040,#FFD54F)}
+.pp-range.s{background:linear-gradient(to right,#0a2040,#E0F7FA)}
+.pp-range.p{background:linear-gradient(to right,#0a2040,#B0BEC5)}
+.pp-range.d{background:linear-gradient(to right,#0a2040,#FFCCBC)}
+.pp-range.a{background:linear-gradient(to right,#0a2040,#FFF176)}
+.pp-range.k{background:linear-gradient(to right,#0a2040,#FFCA28)}
+.pp-range.pt{background:linear-gradient(to right,#0a2040,#90CAF9)}.pp-range.pd{background:linear-gradient(to right,#0a2040,#FFAB91)}.pp-range::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;border:2px solid #0A1628;cursor:pointer;box-shadow:0 0 6px rgba(79,195,247,.4);}
+.pp-range.g::-webkit-slider-thumb{background:#FFD54F}.pp-range.s::-webkit-slider-thumb{background:#E0F7FA}
+.pp-range.p::-webkit-slider-thumb{background:#B0BEC5}.pp-range.d::-webkit-slider-thumb{background:#FFCCBC}
+.pp-range.a::-webkit-slider-thumb{background:#FFF176}.pp-range.k::-webkit-slider-thumb{background:#FFCA28}
+.pp-range.pt::-webkit-slider-thumb{background:#90CAF9}.pp-range.pd::-webkit-slider-thumb{background:#FFAB91}
+.pp-info{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:2px;padding:8px 14px;min-width:148px;flex-shrink:0;border-left:1px solid var(--line);}
+.pp-val-pct,.pp-val-fix{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;}
+.pp-val-pct.pos,.pp-val-fix.pos{color:#4DCB82}.pp-val-pct.neg,.pp-val-fix.neg{color:#E05555}.pp-val-pct.zero,.pp-val-fix.zero{color:var(--dim)}
+.pp-price-label{font-size:9px;color:var(--dim);letter-spacing:.12em;}.pp-price{font-family:'SimSun','宋体',serif;font-size:19px;color:var(--gold2);}
+.pp-reset{background:rgba(79,195,247,.08);border:1px solid var(--line);color:var(--dim);padding:2px 8px;border-radius:4px;font-size:10px;cursor:pointer;font-family:monospace;margin-top:2px;}
+.pp-reset:hover{color:var(--gold);border-color:var(--gold)}
+.pp-sync{font-size:10px;text-align:center;margin-top:8px;height:16px;letter-spacing:.1em;}
+.pp-sync.ok{color:#4DCB82}.pp-sync.err{color:#E05555}.pp-sync.ing{color:var(--gold3)}
+.pp-footer{margin-top:6px;font-size:10px;color:var(--dim);text-align:center;letter-spacing:.12em;}
+</style></head><body><div class="topbar">
+  <div style="min-width:80px"></div>
+  <div class="brand-center">
+    <div class="brand-zh">金典国际百货商城 · 今日回收价</div>
+    <div class="brand-sub">PRECIOUS METALS · LIVE QUOTES</div>
+  </div>
+  <div class="topright">
+    <button class="fs-btn" onclick="toggleFS()" title="全屏">[ ]</button>
+  </div>
+</div><div class="noticebar" id="noticebar" style="display:none"><span class="notice-icon">📢</span><div class="notice-wrap"><span class="notice-text" id="noticeText"></span></div></div>
+<div class="divline"><span class="divline-inner">REAL · TIME · MARKET · DATA</span></div>
+<div class="grid">
+  <div class="col" id="col-gold">
+    <div class="metal-tag">XAU / CNY</div>
+    <div class="metal-name g">黄 金</div>
+    <div class="price-label">回收价（元/克）</div>
+    <div class="price-cny neu" id="p-gold">———</div>
+    <div class="price-unit">CNY / GRAM</div>
+    <div class="chg neu" id="chg-gold">— —</div>
+    <div class="chart-area"><div class="chart-tabs"><div class="chart-tab active" onclick="switchTab('gold','m5',this)">5分钟</div><div class="chart-tab" onclick="switchTab('gold','m15',this)">15分钟</div><div class="chart-tab" onclick="switchTab('gold','h1',this)">1小时</div></div><div class="chart-wrap"><canvas class="chart" id="cv-gold"></canvas></div></div>
+  </div>
+  <div class="col" id="col-silver">
+    <div class="metal-tag">XAG / CNY</div>
+    <div class="metal-name s">白 银</div>
+    <div class="price-label">回收价（元/克）</div>
+    <div class="price-cny neu" id="p-silver">———</div>
+    <div class="price-unit">CNY / GRAM</div>
+    <div class="chg neu" id="chg-silver">— —</div>
+    <div class="chart-area"><div class="chart-tabs"><div class="chart-tab active" onclick="switchTab('silver','m5',this)">5分钟</div><div class="chart-tab" onclick="switchTab('silver','m15',this)">15分钟</div><div class="chart-tab" onclick="switchTab('silver','h1',this)">1小时</div></div><div class="chart-wrap"><canvas class="chart" id="cv-silver"></canvas></div></div>
+  </div> <div class="col" id="col-platinum">
+    <div class="metal-tag">XPT / CNY</div>
+    <div class="metal-name p">铂 金</div>
+    <div class="price-label">回收价（元/克）</div>
+    <div class="price-cny neu" id="p-platinum">———</div>
+    <div class="price-unit">CNY / GRAM</div>
+    <div class="chg neu" id="chg-platinum">— —</div>
+    <div class="chart-area"><div class="chart-tabs"><div class="chart-tab active" onclick="switchTab('platinum','m5',this)">5分钟</div><div class="chart-tab" onclick="switchTab('platinum','m15',this)">15分钟</div><div class="chart-tab" onclick="switchTab('platinum','h1',this)">1小时</div></div><div class="chart-wrap"><canvas class="chart" id="cv-platinum"></canvas></div></div>
+  </div>
+  <div class="col" id="col-palladium">
+    <div class="metal-tag">XPD / CNY</div>
+    <div class="metal-name d">钯 金</div>
+    <div class="price-label">回收价（元/克）</div>
+    <div class="price-cny neu" id="p-palladium">———</div>
+    <div class="price-unit">CNY / GRAM</div>
+    <div class="chg neu" id="chg-palladium">— —</div>
+    <div class="chart-area"><div class="chart-tabs"><div class="chart-tab active" onclick="switchTab('palladium','m5',this)">5分钟</div><div class="chart-tab" onclick="switchTab('palladium','m15',this)">15分钟</div><div class="chart-tab" onclick="switchTab('palladium','h1',this)">1小时</div></div><div class="chart-wrap"><canvas class="chart" id="cv-palladium"></canvas></div></div>
+  </div>
+  <div class="col" id="col-au999">
+    <div class="metal-tag">AU999</div>
+    <div class="metal-name a">Au999</div>
+    <div class="price-label">回收价（元/克）</div>
+    <div class="price-cny neu" id="p-au999">———</div>
+    <div class="price-unit">CNY / GRAM</div>
+    <div class="chg neu" id="chg-au999">— —</div>
+    <div class="chart-area"><div class="chart-tabs"><div class="chart-tab active" onclick="switchTab('au999','m5',this)">5分钟</div><div class="chart-tab" onclick="switchTab('au999','m15',this)">15分钟</div><div class="chart-tab" onclick="switchTab('au999','h1',this)">1小时</div></div><div class="chart-wrap"><canvas class="chart" id="cv-au999"></canvas></div></div>
+  </div>
+  <div class="col" id="col-18k">
+    <div class="metal-tag">18K GOLD</div>
+    <div class="metal-name k">18K</div>
+    <div class="price-label">回收价（元/克）</div>
+    <div class="price-cny neu" id="p-18k">———</div>
+    <div class="price-unit">CNY / GRAM</div>
+    <div class="chg neu" id="chg-18k">— —</div>
+    <div class="chart-area"><div class="chart-tabs"><div class="chart-tab active" onclick="switchTab('18k','m5',this)">5分钟</div><div class="chart-tab" onclick="switchTab('18k','m15',this)">15分钟</div><div class="chart-tab" onclick="switchTab('18k','h1',this)">1小时</div></div><div class="chart-wrap"><canvas class="chart" id="cv-18k"></canvas></div></div>
+  </div>
+  <div class="col" id="col-pt950">
+    <div class="metal-tag">PT950</div>
+    <div class="metal-name pt">Pt950</div>
+    <div class="price-label">回收价（元/克）</div>
+    <div class="price-cny neu" id="p-pt950">———</div>
+    <div class="price-unit">CNY / GRAM</div>
+    <div class="chg neu" id="chg-pt950">— —</div>
+    <div class="chart-area"><div class="chart-tabs"><div class="chart-tab active" onclick="switchTab('pt950','m5',this)">5分钟</div><div class="chart-tab" onclick="switchTab('pt950','m15',this)">15分钟</div><div class="chart-tab" onclick="switchTab('pt950','h1',this)">1小时</div></div><div class="chart-wrap"><canvas class="chart" id="cv-pt950"></canvas></div></div>
+  </div>  <div class="col" id="col-pd990">
+    <div class="metal-tag">PD990</div>
+    <div class="metal-name pd">Pd990</div>
+    <div class="price-label">回收价（元/克）</div>
+    <div class="price-cny neu" id="p-pd990">———</div>
+    <div class="price-unit">CNY / GRAM</div>
+    <div class="chg neu" id="chg-pd990">— —</div>
+    <div class="chart-area"><div class="chart-tabs"><div class="chart-tab active" onclick="switchTab('pd990','m5',this)">5分钟</div><div class="chart-tab" onclick="switchTab('pd990','m15',this)">15分钟</div><div class="chart-tab" onclick="switchTab('pd990','h1',this)">1小时</div></div><div class="chart-wrap"><canvas class="chart" id="cv-pd990"></canvas></div></div>
+  </div>
+</div><div class="bottombar">
+  <div class="status-wrap">
+    <div class="dot" id="dot" onclick="triggerStep1()"></div>
+    <span id="stxt">连接中</span>
+    <span class="lupd" id="lupd" onclick="triggerStep2()"></span>
+  </div>
+  <div class="disclaimer">此行情仅供参考 · 不做交易价格</div>
+</div>
+<div class="hidden-trigger" onclick="triggerStep1()"></div>
+<div class="pwd-wrap" id="pwdWrap">
+  <input class="pwd-input" id="pwdInput" type="password" placeholder="···" maxlength="20" oninput="checkPwd()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+</div>
+<div class="premium-overlay" id="overlay" onclick="overlayClick(event)">
+  <div class="premium-panel">
+    <button class="pp-close" onclick="closePanel()">×</button>
+    <div class="pp-title">溢价调节</div>
+    <div class="pp-sub">各品种独立调节 · 保存后全网同步</div>
+    <div class="pp-row">
+      <div class="pp-metal"><div class="pp-metal-name g">黄金</div><div class="pp-metal-sub">XAU</div></div>
+      <div class="pp-main"><div class="pp-mode-tabs"><button class="pp-mode-tab active" id="mt-pct-gold" onclick="setMode('gold','pct')">百分比 %</button><button class="pp-mode-tab" id="mt-fix-gold" onclick="setMode('gold','fix')">固定加减 ¥</button></div><div class="pp-pct-ctrl" id="pc-gold"><button class="pp-btn" onclick="stepPct('gold',-0.5)">−</button><input type="range" class="pp-range g" id="sp-gold" min="-80" max="50" step="0.5" value="0" oninput="onSlidePct('gold')"><button class="pp-btn" onclick="stepPct('gold',0.5)">+</button></div><div class="pp-fixed-ctrl pp-hidden" id="fc-gold"><button class="pp-btn" onclick="stepFix('gold',-10)">−</button><input type="range" class="pp-range g" id="sf-gold" min="-500" max="200" step="1" value="0" oninput="onSlideFix('gold')"><button class="pp-btn" onclick="stepFix('gold',10)">+</button></div></div>
+      <div class="pp-info"><div class="pp-val-pct zero" id="vp-gold">0.00%</div><div class="pp-val-fix pp-hidden zero" id="vf-gold">0 元/克</div><div class="pp-price-label">当前回收价</div><div class="pp-price" id="pv-gold">--</div><button class="pp-reset" onclick="resetOne('gold')">归零</button></div>
+    </div>
+    <div class="pp-row">
+      <div class="pp-metal"><div class="pp-metal-name s">白银</div><div class="pp-metal-sub">XAG</div></div>
+      <div class="pp-main"><div class="pp-mode-tabs"><button class="pp-mode-tab active" id="mt-pct-silver" onclick="setMode('silver','pct')">百分比 %</button><button class="pp-mode-tab" id="mt-fix-silver" onclick="setMode('silver','fix')">固定加减 ¥</button></div><div class="pp-pct-ctrl" id="pc-silver"><button class="pp-btn" onclick="stepPct('silver',-0.5)">−</button><input type="range" class="pp-range s" id="sp-silver" min="-80" max="50" step="0.5" value="0" oninput="onSlidePct('silver')"><button class="pp-btn" onclick="stepPct('silver',0.5)">+</button></div><div class="pp-fixed-ctrl pp-hidden" id="fc-silver"><button class="pp-btn" onclick="stepFix('silver',-0.5)">−</button><input type="range" class="pp-range s" id="sf-silver" min="-50" max="20" step="0.1" value="0" oninput="onSlideFix('silver')"><button class="pp-btn" onclick="stepFix('silver',10)">+</button></div></div>
+      <div class="pp-info"><div class="pp-val-pct zero" id="vp-silver">0.00%</div><div class="pp-val-fix pp-hidden zero" id="vf-silver">0 元/克</div><div class="pp-price-label">当前回收价</div><div class="pp-price" id="pv-silver">--</div><button class="pp-reset" onclick="resetOne('silver')">归零</button></div>
+    </div>
+    <div class="pp-row">
+      <div class="pp-metal"><div class="pp-metal-name p">铂金</div><div class="pp-metal-sub">XPT</div></div>
+      <div class="pp-main"><div class="pp-mode-tabs"><button class="pp-mode-tab active" id="mt-pct-platinum" onclick="setMode('platinum','pct')">百分比 %</button><button class="pp-mode-tab" id="mt-fix-platinum" onclick="setMode('platinum','fix')">固定加减 ¥</button></div><div class="pp-pct-ctrl" id="pc-platinum"><button class="pp-btn" onclick="stepPct('platinum',-0.5)">−</button><input type="range" class="pp-range p" id="sp-platinum" min="-80" max="50" step="0.5" value="0" oninput="onSlidePct('platinum')"><button class="pp-btn" onclick="stepPct('platinum',0.5)">+</button></div><div class="pp-fixed-ctrl pp-hidden" id="fc-platinum"><button class="pp-btn" onclick="stepFix('platinum',-10)">−</button><input type="range" class="pp-range p" id="sf-platinum" min="-500" max="200" step="1" value="0" oninput="onSlideFix('platinum')"><button class="pp-btn" onclick="stepFix('platinum',10)">+</button></div></div>
+      <div class="pp-info"><div class="pp-val-pct zero" id="vp-platinum">0.00%</div><div class="pp-val-fix pp-hidden zero" id="vf-platinum">0 元/克</div><div class="pp-price-label">当前回收价</div><div class="pp-price" id="pv-platinum">--</div><button class="pp-reset" onclick="resetOne('platinum')">归零</button></div>
+    </div>
+    <div class="pp-row">
+      <div class="pp-metal"><div class="pp-metal-name d">钯金</div><div class="pp-metal-sub">XPD</div></div>
+      <div class="pp-main"><div class="pp-mode-tabs"><button class="pp-mode-tab active" id="mt-pct-palladium" onclick="setMode('palladium','pct')">百分比 %</button><button class="pp-mode-tab" id="mt-fix-palladium" onclick="setMode('palladium','fix')">固定加减 ¥</button></div><div class="pp-pct-ctrl" id="pc-palladium"><button class="pp-btn" onclick="stepPct('palladium',-0.5)">−</button><input type="range" class="pp-range d" id="sp-palladium" min="-80" max="50" step="0.5" value="0" oninput="onSlidePct('palladium')"><button class="pp-btn" onclick="stepPct('palladium',0.5)">+</button></div><div class="pp-fixed-ctrl pp-hidden" id="fc-palladium"><button class="pp-btn" onclick="stepFix('palladium',-10)">−</button><input type="range" class="pp-range d" id="sf-palladium" min="-500" max="200" step="1" value="0" oninput="onSlideFix('palladium')"><button class="pp-btn" onclick="stepFix('palladium',10)">+</button></div></div>
+      <div class="pp-info"><div class="pp-val-pct zero" id="vp-palladium">0.00%</div><div class="pp-val-fix pp-hidden zero" id="vf-palladium">0 元/克</div><div class="pp-price-label">当前回收价</div><div class="pp-price" id="pv-palladium">--</div><button class="pp-reset" onclick="resetOne('palladium')">归零</button></div>
+    </div>
+    <div class="pp-row">
+      <div class="pp-metal"><div class="pp-metal-name a">Au999</div><div class="pp-metal-sub">足金</div></div>
+      <div class="pp-main"><div class="pp-mode-tabs"><button class="pp-mode-tab active" id="mt-pct-au999" onclick="setMode('au999','pct')">百分比 %</button><button class="pp-mode-tab" id="mt-fix-au999" onclick="setMode('au999','fix')">固定加减 ¥</button></div><div class="pp-pct-ctrl" id="pc-au999"><button class="pp-btn" onclick="stepPct('au999',-0.5)">−</button><input type="range" class="pp-range a" id="sp-au999" min="-80" max="50" step="0.5" value="0" oninput="onSlidePct('au999')"><button class="pp-btn" onclick="stepPct('au999',0.5)">+</button></div><div class="pp-fixed-ctrl pp-hidden" id="fc-au999"><button class="pp-btn" onclick="stepFix('au999',-10)">−</button><input type="range" class="pp-range a" id="sf-au999" min="-500" max="200" step="1" value="0" oninput="onSlideFix('au999')"><button class="pp-btn" onclick="stepFix('au999',10)">+</button></div></div>
+      <div class="pp-info"><div class="pp-val-pct zero" id="vp-au999">0.00%</div><div class="pp-val-fix pp-hidden zero" id="vf-au999">0 元/克</div><div class="pp-price-label">当前回收价</div><div class="pp-price" id="pv-au999">--</div><button class="pp-reset" onclick="resetOne('au999')">归零</button></div>
+    </div>
+    <div class="pp-row">
+      <div class="pp-metal"><div class="pp-metal-name k">18K</div><div class="pp-metal-sub">18K金</div></div>
+      <div class="pp-main"><div class="pp-mode-tabs"><button class="pp-mode-tab active" id="mt-pct-18k" onclick="setMode('18k','pct')">百分比 %</button><button class="pp-mode-tab" id="mt-fix-18k" onclick="setMode('18k','fix')">固定加减 ¥</button></div><div class="pp-pct-ctrl" id="pc-18k"><button class="pp-btn" onclick="stepPct('18k',-0.5)">−</button><input type="range" class="pp-range k" id="sp-18k" min="-80" max="50" step="0.5" value="0" oninput="onSlidePct('18k')"><button class="pp-btn" onclick="stepPct('18k',0.5)">+</button></div><div class="pp-fixed-ctrl pp-hidden" id="fc-18k"><button class="pp-btn" onclick="stepFix('18k',-10)">−</button><input type="range" class="pp-range k" id="sf-18k" min="-500" max="200" step="1" value="0" oninput="onSlideFix('18k')"><button class="pp-btn" onclick="stepFix('18k',10)">+</button></div></div>
+      <div class="pp-info"><div class="pp-val-pct zero" id="vp-18k">0.00%</div><div class="pp-val-fix pp-hidden zero" id="vf-18k">0 元/克</div><div class="pp-price-label">当前回收价</div><div class="pp-price" id="pv-18k">--</div><button class="pp-reset" onclick="resetOne('18k')">归零</button></div>
+    </div>
+    <div class="pp-row">    <div class="pp-metal"><div class="pp-metal-name pt">Pt950</div><div class="pp-metal-sub">铂950</div></div>
+      <div class="pp-main"><div class="pp-mode-tabs"><button class="pp-mode-tab active" id="mt-pct-pt950" onclick="setMode('pt950','pct')">百分比 %</button><button class="pp-mode-tab" id="mt-fix-pt950" onclick="setMode('pt950','fix')">固定加减 ¥</button></div><div class="pp-pct-ctrl" id="pc-pt950"><button class="pp-btn" onclick="stepPct('pt950',-0.5)">−</button><input type="range" class="pp-range pt" id="sp-pt950" min="-80" max="50" step="0.5" value="0" oninput="onSlidePct('pt950')"><button class="pp-btn" onclick="stepPct('pt950',0.5)">+</button></div><div class="pp-fixed-ctrl pp-hidden" id="fc-pt950"><button class="pp-btn" onclick="stepFix('pt950',-10)">−</button><input type="range" class="pp-range pt" id="sf-pt950" min="-500" max="200" step="1" value="0" oninput="onSlideFix('pt950')"><button class="pp-btn" onclick="stepFix('pt950',10)">+</button></div></div>
+      <div class="pp-info"><div class="pp-val-pct zero" id="vp-pt950">0.00%</div><div class="pp-val-fix pp-hidden zero" id="vf-pt950">0 元/克</div><div class="pp-price-label">当前回收价</div><div class="pp-price" id="pv-pt950">--</div><button class="pp-reset" onclick="resetOne('pt950')">归零</button></div>
+    </div>
+    <div class="pp-row">
+      <div class="pp-metal"><div class="pp-metal-name pd">Pd990</div><div class="pp-metal-sub">钯990</div></div>
+      <div class="pp-main"><div class="pp-mode-tabs"><button class="pp-mode-tab active" id="mt-pct-pd990" onclick="setMode('pd990','pct')">百分比 %</button><button class="pp-mode-tab" id="mt-fix-pd990" onclick="setMode('pd990','fix')">固定加减 ¥</button></div><div class="pp-pct-ctrl" id="pc-pd990"><button class="pp-btn" onclick="stepPct('pd990',-0.5)">−</button><input type="range" class="pp-range pd" id="sp-pd990" min="-80" max="50" step="0.5" value="0" oninput="onSlidePct('pd990')"><button class="pp-btn" onclick="stepPct('pd990',0.5)">+</button></div><div class="pp-fixed-ctrl pp-hidden" id="fc-pd990"><button class="pp-btn" onclick="stepFix('pd990',-10)">−</button><input type="range" class="pp-range pd" id="sf-pd990" min="-500" max="200" step="1" value="0" oninput="onSlideFix('pd990')"><button class="pp-btn" onclick="stepFix('pd990',10)">+</button></div></div>
+      <div class="pp-info"><div class="pp-val-pct zero" id="vp-pd990">0.00%</div><div class="pp-val-fix pp-hidden zero" id="vf-pd990">0 元/克</div><div class="pp-price-label">当前回收价</div><div class="pp-price" id="pv-pd990">--</div><button class="pp-reset" onclick="resetOne('pd990')">归零</button></div>
+    </div>
+    <div style="margin:8px 0 4px;"><label style="font-size:10px;color:var(--dim);letter-spacing:.1em;">📢 公告内容（留空则不显示）</label><br><input id="noticeInput" type="text" maxlength="100" placeholder="输入公告内容..." style="width:100%;margin-top:4px;background:rgba(10,22,40,0.8);border:1px solid var(--line);border-radius:6px;color:var(--text);font-size:12px;padding:6px 10px;outline:none;font-family:inherit;box-sizing:border-box;"></div>
+    <div style="margin:6px 0 4px;display:flex;align-items:center;gap:10px;"><label style="font-size:10px;color:var(--dim);letter-spacing:.1em;white-space:nowrap;">🐢 滚动速度</label><input id="noticeSpeed" type="range" min="5" max="60" value="25" style="flex:1;height:3px;accent-color:var(--gold);cursor:pointer;"><label style="font-size:10px;color:var(--dim);letter-spacing:.1em;white-space:nowrap;">🐇</label></div>
+    <div class="pp-sync" id="syncTip"></div>
+    <div class="pp-footer">调节后点下方按钮 · 所有访客价格同步更新</div>
+    <div style="text-align:center;margin-top:10px;">
+      <button onclick="saveToFirebase()" style="background:linear-gradient(135deg,#0277BD,#4FC3F7);border:none;color:#0A1628;padding:8px 32px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:.1em;font-family:'Noto Serif SC',serif;">保存并同步所有人</button>
+    </div>
+  </div>
+</div>
+<script>
+var API_URL='https://api.cai666888.dpdns.org/';
+var FB_URL='https://zccv-bffca-default-rtdb.asia-southeast1.firebasedatabase.app/adj.json';
+var FB_NOTICE='https://zccv-bffca-default-rtdb.asia-southeast1.firebasedatabase.app/notice.json';
+var KEYS=['gold','silver','platinum','palladium','au999','18k','pt950','pd990'];
+var adj={gold:{mode:'fix',pct:0,fix:0},silver:{mode:'fix',pct:0,fix:0},platinum:{mode:'fix',pct:0,fix:0},palladium:{mode:'fix',pct:0,fix:0},au999:{mode:'fix',pct:0,fix:0},'18k':{mode:'fix',pct:0,fix:0},pt950:{mode:'fix',pct:0,fix:0},pd990:{mode:'fix',pct:0,fix:0}};
+var prev={},lastPrice={};
+var HIST={gold:{m5:[],m15:[],h1:[]},silver:{m5:[],m15:[],h1:[]},platinum:{m5:[],m15:[],h1:[]},palladium:{m5:[],m15:[],h1:[]},au999:{m5:[],m15:[],h1:[]},'18k':{m5:[],m15:[],h1:[]},pt950:{m5:[],m15:[],h1:[]},pd990:{m5:[],m15:[],h1:[]}};
+var activeTab={gold:'m5',silver:'m5',platinum:'m5',palladium:'m5',au999:'m5','18k':'m5',pt950:'m5',pd990:'m5'};
+var chartCounters={gold:0,silver:0,platinum:0,palladium:0,au999:0,'18k':0,pt950:0,pd990:0};
+function $(id){return document.getElementById(id)}
+function setStatus(cls,txt){$('dot').className='dot '+(cls||'');$('stxt').textContent=txt}
+function toggleFS(){if(!document.fullscreenElement){document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}else{document.exitFullscreen&&document.exitFullscreen()}}
+var step1Done=false,step1Timer=null,pwdTimer=null,PASSWORD='a123456a';
+function triggerStep1(){step1Done=true;clearTimeout(step1Timer);step1Timer=setTimeout(function(){step1Done=false;},8000);}
+function triggerStep2(){if(!step1Done)return;step1Done=false;clearTimeout(step1Timer);showPwdInput();}
+function showPwdInput(){var w=$('pwdWrap'),i=$('pwdInput');w.classList.add('show');i.value='';setTimeout(function(){i.focus();},100);clearTimeout(pwdTimer);pwdTimer=setTimeout(hidePwdInput,6000);}
+function hidePwdInput(){$('pwdWrap').classList.remove('show');$('pwdInput').value='';clearTimeout(pwdTimer);}
+function checkPwd(){clearTimeout(pwdTimer);pwdTimer=setTimeout(hidePwdInput,6000);if($('pwdInput').value===PASSWORD){hidePwdInput();openPanel();}}
+function openPanel(){$('overlay').classList.add('open')}
+function closePanel(){$('overlay').classList.remove('open')}
+function overlayClick(e){if(e.target===$('overlay'))closePanel()}
+var noticeTimer=null;
+function startNotice(text,speed){
+  var nt=$('noticeText');if(!nt)return;
+  nt.textContent='';nt.style.animation='none';if(noticeTimer)clearInterval(noticeTimer);
+  var chars=text.split(''),idx=0;
+  noticeTimer=setInterval(function(){
+    if(idx<chars.length){nt.textContent+=chars[idx];idx++;}
+    else{clearInterval(noticeTimer);var dur=Math.max(8,60-speed)+'s';nt.style.animation='marquee '+dur+' linear infinite';}
+  },80);
+}function loadLocal(){
+  try{var s=localStorage.getItem('jdAdj5');
+    if(s){var d=JSON.parse(s);KEYS.forEach(function(k){if(d[k]){adj[k].mode=d[k].mode||'fix';adj[k].pct=d[k].pct||0;adj[k].fix=d[k].fix!==undefined?d[k].fix:0;}});}
+  }catch(e){}
+  KEYS.forEach(function(k){$('sp-'+k).value=adj[k].pct;$('sf-'+k).value=adj[k].fix;setMode(k,adj[k].mode,true);refreshValUI(k);});
+}
+function applyAdjData(d){
+  if(!d)return;
+  KEYS.forEach(function(k){if(d[k]){adj[k].mode=d[k].mode||'fix';adj[k].pct=d[k].pct||0;adj[k].fix=d[k].fix!==undefined?d[k].fix:0;}});
+  KEYS.forEach(function(k){$('sp-'+k).value=adj[k].pct;$('sf-'+k).value=adj[k].fix;setMode(k,adj[k].mode,true);refreshValUI(k);});
+  KEYS.forEach(function(k){if(lastPrice[k])renderCard(k,lastPrice[k]);});
+  try{localStorage.setItem('jdAdj5',JSON.stringify(adj));}catch(e){}
+}
+var lastNoticeText='',lastNoticeSpeed=0;
+function applyNoticeData(n){
+  if(n&&n.text){
+    if(n.text===lastNoticeText&&(n.speed||25)===lastNoticeSpeed)return;
+    lastNoticeText=n.text;lastNoticeSpeed=n.speed||25;
+    $('noticebar').style.display='flex';startNotice(n.text,lastNoticeSpeed);
+    var ni=$('noticeInput'),ns=$('noticeSpeed');if(ni)ni.value=n.text;if(ns)ns.value=lastNoticeSpeed;
+  }else{
+    if(lastNoticeText==='')return;
+    lastNoticeText='';lastNoticeSpeed=0;
+    $('noticebar').style.display='none';
+  }
+}
+var adjESS=null,noticeESS=null;
+function startSSE(){
+  if(adjESS){try{adjESS.close();}catch(e){}}
+  adjESS=new EventSource(FB_URL);
+  adjESS.addEventListener('put',function(e){try{var msg=JSON.parse(e.data);if(msg&&msg.data)applyAdjData(msg.data);}catch(ex){}});
+  adjESS.addEventListener('patch',function(e){try{var msg=JSON.parse(e.data);if(msg&&msg.data)applyAdjData(msg.data);}catch(ex){}});
+  adjESS.onerror=function(){loadLocal();setTimeout(startSSE,30000);};
+  if(noticeESS){try{noticeESS.close();}catch(e){}}
+  noticeESS=new EventSource(FB_NOTICE);
+  noticeESS.addEventListener('put',function(e){try{var msg=JSON.parse(e.data);if(msg)applyNoticeData(msg.data);}catch(ex){}});
+  noticeESS.addEventListener('patch',function(e){try{var msg=JSON.parse(e.data);if(msg)applyNoticeData(msg.data);}catch(ex){}});
+  noticeESS.onerror=function(){};
+}
+function saveToFirebase(){
+  var tip=$('syncTip');tip.className='pp-sync ing';tip.textContent='同步中...';
+  var noticeVal=$('noticeInput')?$('noticeInput').value.trim():'';
+  var noticeSpeed=$('noticeSpeed')?parseInt($('noticeSpeed').value):25;
+  var p1=fetch(FB_URL,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(adj)}).then(function(r){return r.json();});
+  var p2=fetch(FB_NOTICE,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:noticeVal,speed:noticeSpeed})}).then(function(r){return r.json();});
+  Promise.all([p1,p2]).then(function(res){
+    if(res[0]){tip.className='pp-sync ok';tip.textContent='✓ 已同步，所有人立即更新';
+      try{localStorage.setItem('jdAdj5',JSON.stringify(adj));}catch(e){}
+      if(noticeVal){$('noticebar').style.display='flex';startNotice(noticeVal,noticeSpeed);}else{$('noticebar').style.display='none';}
+      setTimeout(function(){tip.textContent=''},4000);
+    }else{tip.className='pp-sync err';tip.textContent='✗ 同步失败';}
+  }).catch(function(){tip.className='pp-sync err';tip.textContent='✗ 网络错误';});
+}function setMode(key,mode,silent){
+  adj[key].mode=mode;
+  $('mt-pct-'+key).className='pp-mode-tab'+(mode==='pct'?' active':'');
+  $('mt-fix-'+key).className='pp-mode-tab'+(mode==='fix'?' active':'');
+  $('pc-'+key).className='pp-pct-ctrl'+(mode==='pct'?'':' pp-hidden');
+  $('fc-'+key).className='pp-fixed-ctrl'+(mode==='fix'?'':' pp-hidden');
+  $('vp-'+key).className='pp-val-pct'+(mode==='pct'?'':' pp-hidden')+' zero';
+  $('vf-'+key).className='pp-val-fix'+(mode==='fix'?'':' pp-hidden')+' zero';
+  refreshValUI(key);if(!silent&&lastPrice[key])renderCard(key,lastPrice[key]);
+}
+function applyAdj(base,key){return adj[key].mode==='pct'?base*(1+adj[key].pct/100):base+adj[key].fix;}
+function refreshValUI(key){
+  var a=adj[key];
+  if(a.mode==='pct'){var el=$('vp-'+key),sign=a.pct>0?'+':'';el.textContent=sign+a.pct.toFixed(2)+'%';el.className='pp-val-pct '+(a.pct>0?'pos':a.pct<0?'neg':'zero');}
+  else{var el=$('vf-'+key),sign=a.fix>0?'+':'';el.textContent=sign+(Number.isInteger(a.fix)?a.fix:a.fix.toFixed(2))+' 元/克';el.className='pp-val-fix '+(a.fix>0?'pos':a.fix<0?'neg':'zero');}
+  var p=lastPrice[key];$('pv-'+key).textContent=p?applyAdj(p,key).toFixed(2)+' 元/克':'-- 元/克';
+}
+function onSlidePct(key){adj[key].pct=parseFloat($('sp-'+key).value)||0;refreshValUI(key);if(lastPrice[key])renderCard(key,lastPrice[key]);}
+function stepPct(key,d){var nv=Math.min(50,Math.max(-80,Math.round((adj[key].pct+d)*10)/10));adj[key].pct=nv;$('sp-'+key).value=nv;refreshValUI(key);if(lastPrice[key])renderCard(key,lastPrice[key]);}
+function onSlideFix(key){adj[key].fix=parseFloat($('sf-'+key).value)||0;refreshValUI(key);if(lastPrice[key])renderCard(key,lastPrice[key]);}
+function stepFix(key,d){var nv=Math.min(200,Math.max(-500,Math.round((adj[key].fix+d)*10)/10));adj[key].fix=nv;$('sf-'+key).value=nv;refreshValUI(key);if(lastPrice[key])renderCard(key,lastPrice[key]);}
+function resetOne(key){adj[key].pct=0;adj[key].fix=0;$('sp-'+key).value=0;$('sf-'+key).value=0;refreshValUI(key);if(lastPrice[key])renderCard(key,lastPrice[key]);}
+function renderCard(key,base){
+  if(!base)return;
+  var cny=applyAdj(base,key),pEl=$('p-'+key),old=prev[key];
+  var dir=old===undefined?'neu':cny>old?'up':cny<old?'down':'neu';
+  pEl.textContent=cny.toFixed(2);pEl.className='price-cny '+dir;
+  var col=$('col-'+key);col.classList.remove('fu','fd');void col.offsetWidth;
+  if(dir==='up')col.classList.add('fu');if(dir==='down')col.classList.add('fd');
+  if(old!==undefined){var chg=cny-old,pct=chg/old*100,sign=chg>=0?'+':'';
+    $('chg-'+key).textContent=(chg>=0?'▲ ':'▼ ')+sign+chg.toFixed(2)+' ('+sign+pct.toFixed(2)+'%)';
+    $('chg-'+key).className='chg '+(chg>0?'up':chg<0?'down':'neu');}
+  refreshValUI(key);pushChartPoint(key,cny);prev[key]=cny;
+}
+function pushChartPoint(key,cny){
+  var now=Date.now();chartCounters[key]++;
+  HIST[key].m5.push({t:now,v:cny});if(HIST[key].m5.length>150)HIST[key].m5.shift();
+  if(chartCounters[key]%8===0){HIST[key].m15.push({t:now,v:cny});if(HIST[key].m15.length>80)HIST[key].m15.shift();}
+  if(chartCounters[key]%30===0){HIST[key].h1.push({t:now,v:cny});if(HIST[key].h1.length>60)HIST[key].h1.shift();}
+  drawChart(key);
+}function switchTab(key,tab,el){activeTab[key]=tab;var tabs=el.parentNode.querySelectorAll('.chart-tab');tabs.forEach(function(t){t.classList.remove('active')});el.classList.add('active');drawChart(key);}
+function drawChart(key){var canvas=$('cv-'+key);if(!canvas)return;
+  var points=HIST[key][activeTab[key]];
+  var wrap=canvas.parentNode,W=wrap.clientWidth,H=wrap.clientHeight;
+  if(W<2||H<2)return;var dpr=window.devicePixelRatio||1;
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  var ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
+  ctx.clearRect(0,0,W,H);if(points.length<2){ctx.fillStyle='rgba(123,167,194,0.45)';ctx.font='10px JetBrains Mono,monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('数据积累中...',W/2,H/2);return;}
+  var vals=points.map(function(p){return p.v});
+  var minV=Math.min.apply(null,vals),maxV=Math.max.apply(null,vals);
+  var range=maxV-minV||minV*0.001;minV-=range*.12;maxV+=range*.12;range=maxV-minV;
+  var pad={l:42,r:8,t:8,b:20},gW=W-pad.l-pad.r,gH=H-pad.t-pad.b;
+  function xp(i){return pad.l+(i/(points.length-1))*gW}
+  function yp(v){return pad.t+(1-(v-minV)/range)*gH}
+  var isUp=vals[vals.length-1]>=vals[0],lc=isUp?'#4DCB82':'#E05555';
+  for(var gi=0;gi<=4;gi++){var gy=pad.t+gi/4*gH,gv=maxV-(gi/4)*range;ctx.beginPath();ctx.moveTo(pad.l,gy);ctx.lineTo(pad.l+gW,gy);ctx.strokeStyle='rgba(79,195,247,0.08)';ctx.lineWidth=0.5;ctx.stroke();ctx.fillStyle='rgba(123,167,194,0.7)';ctx.font='8px JetBrains Mono,monospace';ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(gv.toFixed(0),pad.l-4,gy);}
+  for(var vi=1;vi<4;vi++){ctx.beginPath();ctx.moveTo(pad.l+vi/4*gW,pad.t);ctx.lineTo(pad.l+vi/4*gW,pad.t+gH);ctx.strokeStyle='rgba(79,195,247,0.04)';ctx.lineWidth=0.5;ctx.stroke();}
+  var areaGrad=ctx.createLinearGradient(0,pad.t,0,pad.t+gH);
+  areaGrad.addColorStop(0,isUp?'rgba(77,203,130,0.28)':'rgba(224,85,85,0.22)');
+  areaGrad.addColorStop(0.6,isUp?'rgba(77,203,130,0.06)':'rgba(224,85,85,0.05)');
+  areaGrad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.beginPath();ctx.moveTo(xp(0),yp(vals[0]));
+  for(var i=1;i<points.length;i++){var x0=xp(i-1),y0=yp(vals[i-1]),x1=xp(i),y1=yp(vals[i]),cpx=(x0+x1)/2;ctx.bezierCurveTo(cpx,y0,cpx,y1,x1,y1);}
+  ctx.lineTo(xp(points.length-1),pad.t+gH);ctx.lineTo(xp(0),pad.t+gH);ctx.closePath();ctx.fillStyle=areaGrad;ctx.fill();
+  ctx.beginPath();ctx.moveTo(xp(0),yp(vals[0]));
+  for(var i=1;i<points.length;i++){var x0=xp(i-1),y0=yp(vals[i-1]),x1=xp(i),y1=yp(vals[i]),cpx=(x0+x1)/2;ctx.bezierCurveTo(cpx,y0,cpx,y1,x1,y1);}
+  ctx.shadowColor=lc;ctx.shadowBlur=6;ctx.strokeStyle=lc;ctx.lineWidth=2;ctx.lineJoin='round';ctx.stroke();ctx.shadowBlur=0;
+  var lx=xp(points.length-1),ly=yp(vals[vals.length-1]);
+  ctx.beginPath();ctx.setLineDash([3,3]);ctx.moveTo(lx,pad.t);ctx.lineTo(lx,pad.t+gH);ctx.strokeStyle='rgba(79,195,247,0.25)';ctx.lineWidth=0.8;ctx.stroke();ctx.setLineDash([]);
+  ctx.beginPath();ctx.arc(lx,ly,5,0,Math.PI*2);ctx.fillStyle='rgba(10,22,40,0.85)';ctx.fill();
+  ctx.beginPath();ctx.arc(lx,ly,3,0,Math.PI*2);ctx.fillStyle=lc;ctx.shadowColor=lc;ctx.shadowBlur=8;ctx.fill();ctx.shadowBlur=0;
+  ctx.font='bold 9px JetBrains Mono,monospace';
+  var pl=vals[vals.length-1].toFixed(2),lw=ctx.measureText(pl).width+8,lbx=Math.min(lx+6,pad.l+gW-lw),lby=Math.max(ly-10,pad.t+4);
+  ctx.fillStyle='rgba(10,22,40,0.90)';ctx.beginPath();ctx.roundRect(lbx,lby-8,lw,14,3);ctx.fill();
+  ctx.fillStyle=lc;ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(pl,lbx+4,lby);
+  ctx.fillStyle='rgba(123,167,194,0.65)';ctx.font='8px JetBrains Mono,monospace';ctx.textBaseline='bottom';
+  ctx.textAlign='left';var t0=new Date(points[0].t);ctx.fillText(t0.getHours()+':'+String(t0.getMinutes()).padStart(2,'0'),pad.l,H-2);
+  ctx.textAlign='right';var tL=new Date(points[points.length-1].t);ctx.fillText(tL.getHours()+':'+String(tL.getMinutes()).padStart(2,'0'),pad.l+gW,H-2);
+  var maxIdx=vals.reduce(function(a,b,i){return b>vals[a]?i:a},0);
+  var minIdx=vals.reduce(function(a,b,i){return b<vals[a]?i:a},0);
+  function drawDot(idx,color,label){var dx=xp(idx),dy=yp(vals[idx]);ctx.beginPath();ctx.arc(dx,dy,2.5,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();ctx.fillStyle=color;ctx.font='8px JetBrains Mono,monospace';ctx.textAlign=idx<points.length/2?'left':'right';ctx.textBaseline='middle';ctx.fillText(label,dx+(idx<points.length/2?5:-5),dy);}
+  drawDot(maxIdx,'rgba(232,208,128,0.7)','H:'+vals[maxIdx].toFixed(1));
+  drawDot(minIdx,'rgba(160,140,100,0.6)','L:'+vals[minIdx].toFixed(1));
+}window.addEventListener('resize',function(){KEYS.forEach(function(k){drawChart(k)})});
+async function loadPrice(){
+  try{const res=await fetch(API_URL);
+    const data=await res.json();if(data&&data['黄金']){
+      lastPrice['gold']=parseFloat(data['黄金']);
+      lastPrice['silver']=parseFloat(data['白银']);
+      lastPrice['platinum']=parseFloat(data['铂金']);
+      lastPrice['palladium']=parseFloat(data['钯金']);
+      lastPrice['au999']=parseFloat(data['Au999'])||parseFloat(data['黄金'])*0.999;
+      lastPrice['18k']=parseFloat(data['18K'])||parseFloat(data['黄金'])*0.75;
+      lastPrice['pt950']=parseFloat(data['Pt950'])||parseFloat(data['铂金'])*0.95;
+      lastPrice['pd990']=parseFloat(data['Pd990'])||parseFloat(data['钯金'])*0.99;
+      KEYS.forEach(function(k){if(lastPrice[k])renderCard(k,lastPrice[k]);});
+      setStatus('live','实时更新中');
+      $('lupd').textContent=new Date().toLocaleTimeString('zh-CN',{hour12:false});
+    }
+  }catch(e){setStatus('err','连接失败');}
+}
+loadLocal();
+loadPrice();
+setInterval(loadPrice,2000);
+startSSE();
+</script>
+</body>
+</html>
